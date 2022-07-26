@@ -4,7 +4,7 @@ export type RouteBase = (
   req: Request,
   res: Response,
   next: NextFunction,
-) => Promise<void> | void;
+) => Promise<Response | void> | Response | void;
 
 export interface IEndPointsController {
   handle: RouteBase;

@@ -9,6 +9,11 @@ import StatusError from '@util/error';
 @injectable()
 export default class ListUserService implements IListUserService {
   repository: IRepositoryUser;
+  emptyError: StatusError = new StatusError(404, 'Error: user list is empty');
+  failedError: StatusError = new StatusError(
+    500,
+    'Error: Failed to readAll database',
+  );
   constructor(
     @inject('UserRepository')
     repository: IRepositoryUser,
@@ -23,9 +28,9 @@ export default class ListUserService implements IListUserService {
         const usersJSON = Object.fromEntries(allUsers);
         return usersJSON;
       }
-      throw new StatusError(404, 'Error: user list is empty');
+      throw this.emptyError;
     } catch (err) {
-      throw new StatusError(500, 'Error: Failed to readAll database');
+      throw this.failedError;
     }
   }
 }

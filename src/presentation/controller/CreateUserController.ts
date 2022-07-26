@@ -10,10 +10,14 @@ export default class CreateUserController implements IEndPointsController {
     this.service = service;
   }
 
-  async handle(req: Request, res: Response, next: NextFunction): Promise<void> {
+  async handle(
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void> {
     try {
-      await this.service.create(req.body);
-      res.status(201).json('User Created');
+      const newUser = await this.service.create(req.body);
+      return res.status(201).json(newUser);
     } catch (error) {
       next(error);
     }

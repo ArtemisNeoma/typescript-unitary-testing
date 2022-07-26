@@ -19,8 +19,9 @@ export default class UserRepository
     return Math.max(...idArray) + 1;
   }
 
-  create(entity: IUser): void {
+  create(entity: IUser): IUser {
     this._database.set(this.getNewIndex(), entity);
+    return entity;
   }
 
   read(id: number): undefined | IUser {

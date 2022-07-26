@@ -16,7 +16,7 @@ export interface IUser {
 export type IVariableDatabase = Map<number, IUser>;
 
 export interface IEndPointsRepository {
-  create(entity: object): void;
+  create(entity: object): object;
   read(id: number): undefined | object;
   readAll(): IVariableDatabase;
   update(id: number, newEntity: object): void;
@@ -24,7 +24,7 @@ export interface IEndPointsRepository {
 }
 
 export interface IRepositoryUser extends IEndPointsRepository {
-  create(entity: IUser): void;
+  create(entity: IUser): IUser;
   read(id: number): undefined | IUser;
   readAll(): IVariableDatabase;
   update(id: number, newEntity: IUser): void;

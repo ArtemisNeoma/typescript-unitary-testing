@@ -10,7 +10,7 @@ export interface IDatabaseObject {
 }
 
 export interface ICreateUserService extends IEndPointsService {
-  create(user: IUser): Promise<void>;
+  create(user: IUser): Promise<IUser>;
 }
 
 export interface IListUserService extends IEndPointsService {
