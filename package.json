@@ -24,7 +24,8 @@
   },
   "scripts": {
     "dev:server": "ts-node-dev -r tsconfig-paths/register --respawn ./src/bin/www.ts",
-    "lint": "eslint -c .eslintrc --ext .ts src"
+    "lint": "eslint -c .eslintrc --ext .ts src",
+    "test": "jest"
   },
   "dependencies": {
     "axios": "^0.27.2",
