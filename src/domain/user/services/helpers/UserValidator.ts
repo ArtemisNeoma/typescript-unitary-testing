@@ -28,7 +28,7 @@ export default class UserValidator implements IUserValidator {
     this._checkUnique = checkUnique;
   }
 
-  async validate(user: IUser, database: IVariableDatabase) {
+  public async validate(user: IUser, database: IVariableDatabase) {
     await this._getCep(user.postal_code);
     this._isCpfValid(user.cpf);
     this._checkUnique(user.email, 'email', database);

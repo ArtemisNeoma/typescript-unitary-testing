@@ -10,7 +10,7 @@ export default class ListUserController implements IEndPointsController {
     this.service = service;
   }
 
-  handle(req: Request, res: Response): Response | void {
+  public handle(req: Request, res: Response): Response | void {
     const info = this.service.readAll();
     return res.status(200).send({ message: info });
   }

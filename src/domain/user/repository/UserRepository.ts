@@ -11,7 +11,7 @@ export default class UserRepository
   extends AbstractRepository
   implements IRepositoryUser
 {
-  getNewIndex(): number {
+  public getNewIndex(): number {
     const idArray = Array.from(this._database.keys());
     if (idArray.length === 0) {
       return 0;
@@ -19,24 +19,24 @@ export default class UserRepository
     return Math.max(...idArray) + 1;
   }
 
-  create(entity: IUser): IUser {
+  public create(entity: IUser): IUser {
     this._database.set(this.getNewIndex(), entity);
     return entity;
   }
 
-  read(id: number): undefined | IUser {
+  public read(id: number): undefined | IUser {
     return this._database.get(id);
   }
 
-  readAll(): IVariableDatabase {
+  public readAll(): IVariableDatabase {
     return this._database;
   }
 
-  update(id: number, newEntity: IUser): void {
+  public update(id: number, newEntity: IUser): void {
     this._database.set(id, newEntity);
   }
 
-  delete(id: number): void {
+  public delete(id: number): void {
     this._database.forEach((value: object, key: number) => {
       if (key === id) {
         this._database.delete(id);

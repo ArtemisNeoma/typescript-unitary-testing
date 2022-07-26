@@ -10,7 +10,7 @@ export default class CreateUserController implements IEndPointsController {
     this.service = service;
   }
 
-  async handle(
+  public async handle(
     req: Request,
     res: Response,
     next: NextFunction,

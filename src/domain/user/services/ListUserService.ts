@@ -21,7 +21,7 @@ export default class ListUserService implements IListUserService {
     this.repository = repository;
   }
 
-  readAll(): IDatabaseObject {
+  public readAll(): IDatabaseObject {
     try {
       const allUsers = this.repository.readAll();
       if (allUsers !== undefined) {
