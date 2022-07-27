@@ -22,4 +22,8 @@ export type MiddlewareArray = Array<RouteMiddleware>;
 
 export type ControllerAdapterType = (
   controller: IEndPointsController,
-) => (req: Request, res: Response, next: NextFunction) => void | Promise<void>;
+) => (
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) => Response | Promise<Response>;
