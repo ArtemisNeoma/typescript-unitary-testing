@@ -1,6 +1,5 @@
 import getCep from '@domain/user/services/helpers/getCep';
-import StatusError from '@util/error';
-import axios, { Axios } from 'axios';
+import axios from 'axios';
 
 describe('getCep', () => {
   describe('getCep', () => {
