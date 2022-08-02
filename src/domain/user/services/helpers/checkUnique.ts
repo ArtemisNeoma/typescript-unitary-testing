@@ -1,5 +1,4 @@
 import { IUser, IVariableDatabase } from '@interfaces/domain/repository';
-import StatusError from '@util/error';
 
 export const checkUnique = (
   field: string,
@@ -7,10 +6,12 @@ export const checkUnique = (
   database: IVariableDatabase,
 ): void => {
   const usersArray = Array.from(database.values());
+  let result = true;
   usersArray.map((value: IUser) => {
     if (value[fieldName] === field) {
-      throw new StatusError(422, `${fieldName} ${field} já existe`);
+      result = false;
     }
+    return result;
   });
 };
 

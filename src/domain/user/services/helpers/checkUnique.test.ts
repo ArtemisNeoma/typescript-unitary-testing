@@ -10,16 +10,12 @@ beforeAll(() => {
 
 describe('checkUnique', () => {
   describe('checkUnique', () => {
-    it('Should not throw error when checking a unique item', () => {
-      expect(() =>
-        checkUnique(mockUser.email, 'email', mockDatabase),
-      ).not.toThrow();
+    it('Should return true when checking a unique item', () => {
+      expect(checkUnique(mockUser.email, 'email', mockDatabase)).toBe(true);
     });
     it('Should throw error when checking an already existing item', () => {
       mockDatabase.set(0, mockUser);
-      expect(() =>
-        checkUnique(mockUser.email, 'email', mockDatabase),
-      ).toThrow();
+      expect(checkUnique(mockUser.email, 'email', mockDatabase)).toBe(false);
     });
   });
 });
