@@ -26,4 +26,4 @@ export type ControllerAdapterType = (
   req: Request,
   res: Response,
   next: NextFunction,
-) => Response | Promise<Response>;
+) => Response | undefined | Promise<Response | undefined>;
