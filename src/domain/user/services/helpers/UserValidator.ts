@@ -4,24 +4,24 @@ import { inject, injectable } from 'tsyringe';
 
 @injectable()
 export default class UserValidator implements IUserValidator {
-  private _getCep: (value: string) => Promise<void>;
-  private _isCpfValid: (cpf: string) => void;
+  private _getCep: (value: string) => Promise<boolean>;
+  private _isCpfValid: (cpf: string) => boolean;
   private _checkUnique: (
     value: string,
     fieldName: keyof IUser,
     database: IVariableDatabase,
-  ) => void;
+  ) => boolean;
   constructor(
     @inject('getCep')
-    getCep: (value: string) => Promise<void>,
+    getCep: (value: string) => Promise<boolean>,
     @inject('isCpfValid')
-    isCpfValid: (cpf: string) => void,
+    isCpfValid: (cpf: string) => boolean,
     @inject('checkUnique')
     checkUnique: (
       value: string,
       fieldName: keyof IUser,
       database: IVariableDatabase,
-    ) => void,
+    ) => boolean,
   ) {
     this._getCep = getCep;
     this._isCpfValid = isCpfValid;
@@ -29,9 +29,12 @@ export default class UserValidator implements IUserValidator {
   }
 
   public async validate(user: IUser, database: IVariableDatabase) {
-    await this._getCep(user.postal_code);
-    this._isCpfValid(user.cpf);
-    this._checkUnique(user.email, 'email', database);
-    this._checkUnique(user.cpf, 'cpf', database);
+    if (!(await this._getCep(user.postal_code)))
+      throw Error(`CEP ${user.postal_code} is invalid`);
+    if (!this._isCpfValid(user.cpf)) throw Error(`CPF ${user.cpf} is invalid`);
+    if (!this._checkUnique(user.email, 'email', database))
+      throw Error(`Email ${user.email} already exists`);
+    if (!this._checkUnique(user.cpf, 'cpf', database))
+      throw Error(`CPF ${user.cpf} already exists`);
   }
 }
