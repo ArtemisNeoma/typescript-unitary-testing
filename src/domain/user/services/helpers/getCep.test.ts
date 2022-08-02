@@ -4,18 +4,16 @@ import axios, { Axios } from 'axios';
 
 describe('getCep', () => {
   describe('getCep', () => {
-    it('Should not throw error when testing valid postal code', () => {
+    it('Should not throw error when testing valid postal code', async () => {
       jest.spyOn(axios, 'get').mockResolvedValueOnce({ status: 200 });
-      expect(() => getCep('')).not.toThrow();
+      expect(await getCep('')).toBe(true);
     });
     it('Should throw error when testing invalid code', async () => {
       const mockAxios = jest.spyOn(axios, 'get');
       mockAxios.mockImplementation(() =>
         Promise.reject(new Error('cep invalido ')),
       );
-      await expect(() => getCep('')).rejects.toEqual(
-        new StatusError(422, 'ValidationError: postal_code is invalid'),
-      );
+      expect(await getCep('')).toBe(false);
     });
   });
 });
