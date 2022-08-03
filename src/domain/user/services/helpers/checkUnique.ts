@@ -4,15 +4,15 @@ export const checkUnique = (
   field: string,
   fieldName: keyof IUser,
   database: IVariableDatabase,
-): void => {
+) => {
   const usersArray = Array.from(database.values());
   let result = true;
   usersArray.map((value: IUser) => {
     if (value[fieldName] === field) {
       result = false;
     }
-    return result;
   });
+  return result;
 };
 
 export default checkUnique;
