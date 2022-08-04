@@ -4,9 +4,9 @@ import { inject, injectable } from 'tsyringe';
 
 @injectable()
 export default class UserValidator implements IUserValidator {
-  private _getCep: (value: string) => Promise<boolean>;
-  private _isCpfValid: (cpf: string) => boolean;
-  private _checkUnique: (
+  readonly _getCep: (value: string) => Promise<boolean>;
+  readonly _isCpfValid: (cpf: string) => boolean;
+  readonly _checkUnique: (
     value: string,
     fieldName: keyof IUser,
     database: IVariableDatabase,

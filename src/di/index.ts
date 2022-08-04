@@ -51,3 +51,5 @@ container.register('isCpfValid', {
 container.register('checkUnique', {
   useValue: checkUnique,
 });
+
+export default container;
