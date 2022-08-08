@@ -33,8 +33,9 @@ export default class UserRepository
     return this.database;
   }
 
-  public update(id: number, newEntity: IUser): void {
+  public update(id: number, newEntity: IUser): IUser | undefined {
     this.database.set(id, newEntity);
+    return this.database.get(id);
   }
 
   public delete(id: number): void {
