@@ -38,11 +38,7 @@ export default class UserRepository
     return this.database.get(id);
   }
 
-  public delete(id: number): void {
-    this.database.forEach((value: object, key: number) => {
-      if (key === id) {
-        this.database.delete(id);
-      }
-    });
+  public delete(id: number): boolean {
+    return this.database.delete(id);
   }
 }
