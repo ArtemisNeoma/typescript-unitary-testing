@@ -12,7 +12,7 @@ import {
 import { IUserValidator } from '@interfaces/domain/services/validation';
 import { ControllerAdapterType, MiddlewareArray } from '@interfaces/middleware';
 import { IEndPointsController } from '@interfaces/presentation/controller';
-import ControllerAdapter from '@middleware/controllerAdapter';
+import controllerAdapter from '@middleware/controllerAdapter';
 import createUserMiddlewares from '@middleware/user/createMiddlewares';
 import isCpfValid from '@util/validation/Cpf/isCpfValid';
 import { Router } from 'express';
@@ -33,7 +33,7 @@ container.register<MiddlewareArray>('CreateUserMiddlewares', {
   useValue: createUserMiddlewares,
 });
 container.register<ControllerAdapterType>('ControllerAdapter', {
-  useValue: ControllerAdapter,
+  useValue: controllerAdapter,
 });
 
 container.register<ICreateUserService>('CreateUserService', CreateUserService);
