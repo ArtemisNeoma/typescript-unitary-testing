@@ -1,3 +1,4 @@
+import StatusError from '@util/error';
 import { NextFunction, Request, Response } from 'express';
 import { ICreateUserService } from 'interfaces/domain/services/service';
 import { IEndPointsController } from 'interfaces/presentation/controller';
@@ -19,7 +20,7 @@ export default class CreateUserController implements IEndPointsController {
       const newUser = await this.service.create(req.body);
       return res.status(201).json(newUser);
     } catch (error) {
-      next(error);
+      next(new StatusError(422, `${error}`));
     }
   }
 }
