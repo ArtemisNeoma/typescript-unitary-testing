@@ -3,6 +3,7 @@ import { NextFunction, Request, Response } from 'express';
 import { IUser } from '@interfaces/domain/repository';
 import CreateUserController from './CreateUserController';
 import CreateUserService from '@domain/user/services/CreateUserService';
+import StatusError from '@util/error';
 
 const userMock: IUser = {} as IUser;
 const req = {} as Request;
@@ -33,7 +34,7 @@ describe('CreateUserController', () => {
       spyCreateUserController.mockRejectedValue(error);
       await createUserController.handle(req, res, next);
       expect(next).toBeCalled();
-      expect(next).toHaveBeenCalledWith(error);
+      expect(next).toHaveBeenCalledWith(new StatusError(422, `${error}`));
     });
   });
 });
