@@ -19,19 +19,19 @@ beforeAll(() => {
   res.json = jest.fn();
 });
 
-describe('CreateController', () => {
+describe('CreateUserController', () => {
   describe('handle', () => {
-    const userController = container.resolve(CreateUserController);
+    const createUserController = container.resolve(CreateUserController);
     it('Should create user when all fields are correct', async () => {
       spyCreateUserController.mockResolvedValue(userMock);
-      await userController.handle(req, res, next);
+      await createUserController.handle(req, res, next);
       expect(res.status).toBeCalled();
       expect(res.status).toHaveBeenCalledWith(201);
     });
     it('Should run next with error when user is incorrect', async () => {
       const error = new Error();
       spyCreateUserController.mockRejectedValue(error);
-      await userController.handle(req, res, next);
+      await createUserController.handle(req, res, next);
       expect(next).toBeCalled();
       expect(next).toHaveBeenCalledWith(error);
     });
