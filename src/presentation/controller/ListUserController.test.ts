@@ -21,13 +21,13 @@ beforeAll(() => {
 describe('ListUserController', () => {
   describe('handle', () => {
     const listUserController = container.resolve(ListUserController);
-    it('Should create user when all fields are correctttttt', () => {
+    it('Should send users json with status code 200 when services succeds', () => {
       spyListUserService.mockReturnValue(databaseMock);
       listUserController.handle(req, res, next);
       expect(res.json).toBeCalledWith({ message: databaseMock });
       expect(res.status).toBeCalledWith(200);
     });
-    it('Should run next with error when user is incorrect', async () => {
+    it('Should run next with error when service fails', async () => {
       spyListUserService.mockImplementation(() => {
         throw error;
       });
