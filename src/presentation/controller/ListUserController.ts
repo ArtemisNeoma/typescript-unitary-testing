@@ -6,10 +6,7 @@ import { inject, injectable } from 'tsyringe';
 
 @injectable()
 export default class ListUserController implements IEndPointsController {
-  service: IListUserService;
-  constructor(@inject('ListUserService') service: IListUserService) {
-    this.service = service;
-  }
+  constructor(@inject('ListUserService') private service: IListUserService) {}
 
   public handle(
     req: Request,

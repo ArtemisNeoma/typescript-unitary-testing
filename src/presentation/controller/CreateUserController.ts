@@ -6,10 +6,9 @@ import { inject, injectable } from 'tsyringe';
 
 @injectable()
 export default class CreateUserController implements IEndPointsController {
-  service: ICreateUserService;
-  constructor(@inject('CreateUserService') service: ICreateUserService) {
-    this.service = service;
-  }
+  constructor(
+    @inject('CreateUserService') private service: ICreateUserService,
+  ) {}
 
   public async handle(
     req: Request,
