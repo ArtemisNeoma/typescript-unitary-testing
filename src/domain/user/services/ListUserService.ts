@@ -8,17 +8,14 @@ import StatusError from '@util/error';
 
 @injectable()
 export default class ListUserService implements IListUserService {
-  repository: IRepositoryUser;
   failedError: StatusError = new StatusError(
     500,
     'Error: Failed to readAll database',
   );
   constructor(
     @inject('UserRepository')
-    repository: IRepositoryUser,
-  ) {
-    this.repository = repository;
-  }
+    private repository: IRepositoryUser,
+  ) {}
 
   public readAll(): IDatabaseObject {
     try {
