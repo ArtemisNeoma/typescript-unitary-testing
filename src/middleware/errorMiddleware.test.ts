@@ -4,13 +4,10 @@ import { errorMiddleware } from './errorMiddleware';
 
 const req = {} as Request;
 const res = {} as Response;
+res.status = jest.fn().mockImplementation(() => res);
+res.json = jest.fn().mockImplementation(() => res);
 const next = jest.fn() as NextFunction;
 const statusError = new StatusError(404, '');
-
-beforeAll(() => {
-  res.status = jest.fn().mockImplementation(() => res);
-  res.json = jest.fn().mockImplementation(() => res);
-});
 
 describe('errorMiddleware', () => {
   it('Should send error as json with StatusError status code', () => {
