@@ -1,4 +1,4 @@
-import getCep from '@domain/user/services/helpers/getCep';
+import getCep from './getCep';
 import axios from 'axios';
 
 describe('getCep', () => {
