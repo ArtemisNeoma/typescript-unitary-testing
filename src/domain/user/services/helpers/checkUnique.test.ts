@@ -2,11 +2,7 @@ import { IUser, IVariableDatabase } from '@interfaces/domain/repository';
 import checkUnique from './checkUnique';
 
 const mockDatabase: IVariableDatabase = new Map<number, IUser>();
-const mockUser: IUser = {} as IUser;
-
-beforeAll(() => {
-  mockUser.email = 'test@test.com.br';
-});
+const mockUser: IUser = { email: 'test@test.com.br' } as IUser;
 
 describe('checkUnique', () => {
   describe('checkUnique', () => {
