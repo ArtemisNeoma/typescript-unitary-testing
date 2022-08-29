@@ -1,7 +1,7 @@
 import UserRepository from '@domain/user/repository/UserRepository';
 import CreateUserService from '@domain/user/services/CreateUserService';
 import checkUnique from '@domain/user/services/helpers/checkUnique';
-import getCep from '@domain/user/services/helpers/getCep';
+import getCep from 'services/cep/getCep';
 import UserValidator from '@domain/user/services/helpers/UserValidator';
 import ListUserService from '@domain/user/services/ListUserService';
 import { IRepositoryUser } from '@interfaces/domain/repository';
@@ -12,7 +12,7 @@ import {
 import { IUserValidator } from '@interfaces/domain/services/validation';
 import { ControllerAdapterType, MiddlewareArray } from '@interfaces/middleware';
 import { IEndPointsController } from '@interfaces/presentation/controller';
-import ControllerAdapter from '@middleware/controllerAdapter';
+import controllerAdapter from '@middleware/controllerAdapter';
 import createUserMiddlewares from '@middleware/user/createMiddlewares';
 import isCpfValid from '@util/validation/Cpf/isCpfValid';
 import { Router } from 'express';
@@ -33,7 +33,7 @@ container.register<MiddlewareArray>('CreateUserMiddlewares', {
   useValue: createUserMiddlewares,
 });
 container.register<ControllerAdapterType>('ControllerAdapter', {
-  useValue: ControllerAdapter,
+  useValue: controllerAdapter,
 });
 
 container.register<ICreateUserService>('CreateUserService', CreateUserService);
@@ -51,3 +51,5 @@ container.register('isCpfValid', {
 container.register('checkUnique', {
   useValue: checkUnique,
 });
+
+export default container;

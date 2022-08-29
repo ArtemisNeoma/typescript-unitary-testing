@@ -1,30 +1,21 @@
 import { ControllerAdapterType, MiddlewareArray } from '@interfaces/middleware';
 import { IEndPointsController } from '@interfaces/presentation/controller';
 import { Router } from 'express';
-import { IRouterUser } from 'interfaces/presentation/router';
 import { inject, injectable } from 'tsyringe';
-import AbstractRouter from './AbstractRouter';
 
 @injectable()
-export default class UserRouter extends AbstractRouter implements IRouterUser {
-  createUserController: IEndPointsController;
-  listUserController: IEndPointsController;
-  createMiddlewares: MiddlewareArray;
-  controllerAdapter: ControllerAdapterType;
-
+export default class UserRouter {
   constructor(
-    @inject('FrameworkRouter') router: Router,
-    @inject('CreateUserController') createUserController: IEndPointsController,
-    @inject('ListUserController') listUserController: IEndPointsController,
-    @inject('CreateUserMiddlewares') createMiddlewares: MiddlewareArray,
-    @inject('ControllerAdapter') controllerAdapter: ControllerAdapterType,
+    @inject('FrameworkRouter') private router: Router,
+    @inject('CreateUserController')
+    private createUserController: IEndPointsController,
+    @inject('ListUserController')
+    private listUserController: IEndPointsController,
+    @inject('CreateUserMiddlewares') private createMiddlewares: MiddlewareArray,
+    @inject('ControllerAdapter')
+    private controllerAdapter: ControllerAdapterType,
   ) {
-    super(router);
-    this.createUserController = createUserController;
-    this.listUserController = listUserController;
-    this.createMiddlewares = createMiddlewares;
-    this.controllerAdapter = controllerAdapter;
-    this.routes();
+    this._routes();
   }
 
   protected _routes(): void {

@@ -16,16 +16,16 @@ export interface IUser {
 export type IVariableDatabase = Map<number, IUser>;
 
 export interface IEndPointsRepository {
-  create(entity: object): object;
+  create(entity: object): object | undefined;
   read(id: number): undefined | object;
   readAll(): IVariableDatabase;
-  update(id: number, newEntity: object): void;
+  update(id: number, newEntity: object): object | undefined;
   delete(id: number): void;
 }
 
 export interface IRepositoryUser extends IEndPointsRepository {
-  create(entity: IUser): IUser;
+  create(entity: IUser): IUser | undefined;
   read(id: number): undefined | IUser;
   readAll(): IVariableDatabase;
-  update(id: number, newEntity: IUser): void;
+  update(id: number, newEntity: IUser): IUser | undefined;
 }
